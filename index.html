@@ -4,7 +4,15 @@
 </head>
 
 <body>
-<div id="gameWrapper" class="wrapper animated"><canvas id="game" class=""></canvas></div>
+
+<div id="gameWrapper" class="wrapper">
+    <div id="placeholderUi">
+        <div id="rooms"></div>
+        <div id="players"></div>
+        <div id="cards"></div>
+    </div>
+    <canvas id="game" class=""></canvas>
+</div>
 <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 <script data-main="index" src="require.js"></script>
 
