@@ -8,6 +8,7 @@ define(function() {
 
     function generateTeamSelect(maxPlayerCount, parent) {
         if (!parent) return;
+        parent.innerHTML = '';
         const teamSize = (maxPlayerCount / 2);
         // generate spymaster option
         parent.appendChild(makeDiv(`red-player-0`, `red spymaster`,`teamChoice`, logCallback));

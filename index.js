@@ -9,7 +9,8 @@ function init() {
         'scripts/multiplayer.js',
         'scripts/cards.js',
         'assets/words.js',
-    ], function (configs, placeholderUi, multiplayer, cards, words) {
+        'scripts/rooms.js',
+    ], function (configs, placeholderUi, multiplayer, cards, words, rooms) {
         // all dom functions happen here.
 
         // init modules.
@@ -19,15 +20,15 @@ function init() {
             configs.get('blackCount'),
             // red/blue count to alternate based on previous game
             configs.get('redCount'), configs.get('blueCount'));
-        multiplayer.init();
-        placeholderUi.generateRooms(multiplayer.getRoomsList(), document.querySelector('#placeholderUi > #rooms'));
+        multiplayer.init(rooms.getAllRooms, rooms.roomListener);
+        placeholderUi.generateRooms(rooms.getAllRooms(), document.querySelector('#placeholderUi > #rooms'));
         placeholderUi.generateTeamSelect(configs.get('maxPlayerCount'), document.querySelector('#placeholderUi > #rooms'));
         placeholderUi.generateGameCard(cards.getCards(), document.querySelector('#placeholderUi > #rooms'));
 
         // game loop
         setInterval(function () {
             tick();
-            render();
+            render(rooms, placeholderUi);
         }, 1000 / configs.get('fps'));
 
         setInterval(function () {
@@ -41,6 +42,6 @@ function tick() {
 
 }
 
-function render() {
-
+function render(rooms, placeholderUi) {
+    placeholderUi.generateRooms(rooms.getAllRooms(), document.querySelector('#placeholderUi > #rooms'));
 }
